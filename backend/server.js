@@ -18,9 +18,13 @@ mongoose.connect(process.env.MONGO_URI)
 const authRoutes = require('./routes/authRoutes');
 const alumniRoutes = require('./routes/alumniRoutes');
 const eventRoutes = require('./routes/eventRoutes');
+const jobRoutes = require('./routes/jobRoutes');
+const donationRoutes = require('./routes/donationRoutes');
 app.use('/api/auth', authRoutes);
 app.use('/api/alumni', alumniRoutes);
 app.use('/api/events', eventRoutes);
+app.use('/api/jobs', jobRoutes);
+app.use('/api/donations', donationRoutes);
 
 // Test Route
 app.get('/', (req, res) => {
