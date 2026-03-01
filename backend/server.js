@@ -11,8 +11,12 @@ app.use(express.json());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
+  .then(() => console.log("✅ MongoDB Connected Successfully"))
   .catch(err => console.log("❌ DB Connection Error:", err));
+
+// Routes
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
 
 // Test Route
 app.get('/', (req, res) => {
