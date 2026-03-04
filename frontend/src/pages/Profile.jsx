@@ -190,6 +190,7 @@ export default function ProfilePage() {
                     src={form.profilePicture}
                     alt={form.name}
                     className="object-cover"
+                    referrerPolicy="no-referrer"
                     onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'flex'; }}
                   />
                 ) : null}

@@ -84,6 +84,7 @@ export default function DashboardLayout() {
                     src={user.profilePicture}
                     alt={user.name}
                     className="size-10 rounded-full object-cover"
+                    referrerPolicy="no-referrer"
                     onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'flex'; }}
                   />
                 ) : null}

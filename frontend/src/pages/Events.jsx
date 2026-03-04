@@ -713,7 +713,7 @@ export default function EventsPage() {
                             <div className="relative group cursor-pointer">
                               <Avatar size="lg">
                                 {guest.profilePicture ? (
-                                  <img src={guest.profilePicture} alt={displayName} className="object-cover" />
+                                  <img src={guest.profilePicture} alt={displayName} className="object-cover" referrerPolicy="no-referrer" />
                                 ) : (
                                   <div className="flex h-full w-full items-center justify-center bg-primary/10 text-sm font-medium text-foreground">
                                     {initials}
@@ -1239,7 +1239,7 @@ export default function EventsPage() {
                               <div className="relative group cursor-pointer">
                                 <Avatar size="lg">
                                   {guest.profilePicture ? (
-                                    <img src={guest.profilePicture} alt={displayName} className="object-cover" />
+                                    <img src={guest.profilePicture} alt={displayName} className="object-cover" referrerPolicy="no-referrer" />
                                   ) : (
                                     <div className="flex h-full w-full items-center justify-center bg-primary/10 text-sm font-medium text-foreground">
                                       {initials}

@@ -250,6 +250,7 @@ export default function AlumniPage() {
                               src={item.profilePicture}
                               alt={item.name}
                               className="object-cover"
+                              referrerPolicy="no-referrer"
                               onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'flex'; }}
                             />
                           ) : null}
