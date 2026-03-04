@@ -8,6 +8,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import useAuthStore from '@/store/authStore';
 import { toast } from 'sonner';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const navItems = [
   { label: 'Dashboard', icon: Home, to: '/' },
@@ -55,9 +56,16 @@ export default function DashboardLayout() {
             <img src="/src/assets/logo2.png" alt="Alumni Link" className={`shrink-0 transition-all ${collapsed ? 'h-12' : 'h-14'} w-auto`} />
             {!collapsed && <span className="font-bold text-sm tracking-tight">ALUMNI LINK</span>}
           </div>
-          <Button variant="ghost" size="icon-sm" onClick={() => setCollapsed((v) => !v)}>
-            {collapsed ? <Menu className="size-4" /> : <X className="size-4" />}
-          </Button>
+          <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon-sm" onClick={() => setCollapsed((v) => !v)}>
+                {collapsed ? <Menu className="size-4" /> : <X className="size-4" />}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right">{collapsed ? 'Expand sidebar' : 'Collapse sidebar'}</TooltipContent>
+          </Tooltip>
+          </TooltipProvider>
         </div>
         <nav className="flex flex-1 flex-col gap-1">
           {navItems.map(({ label, icon: Icon, to }) => (

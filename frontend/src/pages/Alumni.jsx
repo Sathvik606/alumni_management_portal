@@ -13,6 +13,7 @@ import useAuthStore from '@/store/authStore';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Users, Pencil, Trash2, User, ChevronLeft, ChevronRight, Download, Shield, ShieldCheck } from 'lucide-react';
 import { toast } from 'sonner';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { exportAlumni } from '@/utils/exportUtils';
 
 const filterDefaults = { name: '', department: '', graduationYear: '' };
@@ -282,33 +283,48 @@ export default function AlumniPage() {
                       )}
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end gap-2">
+                          <TooltipProvider>
                           {isAdmin && item._id !== user?._id && (
-                            <Button
-                              variant="ghost"
-                              size="icon-sm"
-                              onClick={() => handleRoleChange(item._id, item.role)}
-                              title={`Change role to ${item.role === 'admin' ? 'alumni' : 'admin'}`}
-                              aria-label={`Change ${item.name}'s role to ${item.role === 'admin' ? 'alumni' : 'admin'}`}
-                            >
-                              <Shield className="size-4" />
-                            </Button>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="icon-sm"
+                                  onClick={() => handleRoleChange(item._id, item.role)}
+                                  aria-label={`Change ${item.name}'s role to ${item.role === 'admin' ? 'alumni' : 'admin'}`}
+                                >
+                                  <Shield className="size-4" />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>Change role to {item.role === 'admin' ? 'alumni' : 'admin'}</TooltipContent>
+                            </Tooltip>
                           )}
-                          <Button
-                            variant="ghost"
-                            size="icon-sm"
-                            onClick={() => setModal({ open: true, record: item })}
-                            disabled={!isAdmin && item._id !== user?._id}
-                            aria-label={`Edit ${item.name}'s profile`}
-                          >
-                            <Pencil className="size-4" />
-                          </Button>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                size="icon-sm"
+                                onClick={() => setModal({ open: true, record: item })}
+                                disabled={!isAdmin && item._id !== user?._id}
+                                aria-label={`Edit ${item.name}'s profile`}
+                              >
+                                <Pencil className="size-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Edit profile</TooltipContent>
+                          </Tooltip>
                           {isAdmin && (
                             <AlertDialog open={deleteDialog.open && deleteDialog.id === item._id} onOpenChange={(open) => setDeleteDialog({ open, id: open ? item._id : null })}>
-                              <AlertDialogTrigger asChild>
-                                <Button variant="ghost" size="icon-sm" aria-label={`Delete ${item.name}'s profile`}>
-                                  <Trash2 className="size-4 text-destructive" />
-                                </Button>
-                              </AlertDialogTrigger>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <AlertDialogTrigger asChild>
+                                    <Button variant="ghost" size="icon-sm" aria-label={`Delete ${item.name}'s profile`}>
+                                      <Trash2 className="size-4 text-destructive" />
+                                    </Button>
+                                  </AlertDialogTrigger>
+                                </TooltipTrigger>
+                                <TooltipContent>Delete profile</TooltipContent>
+                              </Tooltip>
                               <AlertDialogContent>
                                 <AlertDialogHeader>
                                   <AlertDialogTitle>Delete alumni profile?</AlertDialogTitle>
@@ -325,6 +341,7 @@ export default function AlumniPage() {
                               </AlertDialogContent>
                             </AlertDialog>
                           )}
+                          </TooltipProvider>
                         </div>
                       </TableCell>
                     </TableRow>

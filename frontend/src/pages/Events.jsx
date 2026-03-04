@@ -18,6 +18,7 @@ import useAuthStore from '@/store/authStore';
 import { Skeleton } from '@/components/ui/skeleton';
 import { CalendarDays, CalendarIcon, Pencil, Trash2, CheckCircle2, Clock, UserPlus, X, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import { toast } from 'sonner';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { format } from 'date-fns';
 import { exportEvents } from '@/utils/exportUtils';
 
@@ -880,15 +881,26 @@ export default function EventsPage() {
                             </Button>
                             {isAdmin && (
                               <>
-                                <Button variant="ghost" size="icon-sm" onClick={() => setModal({ open: true, record: { ...event, guests: event.guests || [] } })}>
-                                  <Pencil className="size-4" />
-                                </Button>
-                                <AlertDialog open={deleteDialog.open && deleteDialog.id === event._id} onOpenChange={(open) => setDeleteDialog({ open, id: open ? event._id : null })}>
-                                  <AlertDialogTrigger asChild>
-                                    <Button variant="ghost" size="icon-sm">
-                                      <Trash2 className="size-4 text-destructive" />
+                                <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Button variant="ghost" size="icon-sm" onClick={() => setModal({ open: true, record: { ...event, guests: event.guests || [] } })}>
+                                      <Pencil className="size-4" />
                                     </Button>
-                                  </AlertDialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>Edit event</TooltipContent>
+                                </Tooltip>
+                                <AlertDialog open={deleteDialog.open && deleteDialog.id === event._id} onOpenChange={(open) => setDeleteDialog({ open, id: open ? event._id : null })}>
+                                  <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <AlertDialogTrigger asChild>
+                                        <Button variant="ghost" size="icon-sm">
+                                          <Trash2 className="size-4 text-destructive" />
+                                        </Button>
+                                      </AlertDialogTrigger>
+                                    </TooltipTrigger>
+                                    <TooltipContent>Delete event</TooltipContent>
+                                  </Tooltip>
                                   <AlertDialogContent>
                                     <AlertDialogHeader>
                                       <AlertDialogTitle>Delete event?</AlertDialogTitle>
@@ -904,6 +916,7 @@ export default function EventsPage() {
                                     </AlertDialogFooter>
                                   </AlertDialogContent>
                                 </AlertDialog>
+                                </TooltipProvider>
                               </>
                             )}
                           </div>

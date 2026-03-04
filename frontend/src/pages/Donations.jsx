@@ -15,6 +15,7 @@ import useAuthStore from '@/store/authStore';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Gift, Pencil, Trash2, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import { toast } from 'sonner';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { exportDonations } from '@/utils/exportUtils';
 
 const defaultForm = {
@@ -364,23 +365,34 @@ export default function DonationsPage() {
                         <TableCell>{new Date(donation.createdAt).toLocaleDateString()}</TableCell>
                         <TableCell className="text-right">
                           <div className="flex items-center justify-end gap-2">
+                            <TooltipProvider>
                             {isAdmin && (
-                              <Button
-                                variant="ghost"
-                                size="icon-sm"
-                                onClick={() => openEdit(donation)}
-                                disabled={mutating}
-                              >
-                                <Pencil className="size-4" />
-                              </Button>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon-sm"
+                                    onClick={() => openEdit(donation)}
+                                    disabled={mutating}
+                                  >
+                                    <Pencil className="size-4" />
+                                  </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>Edit donation</TooltipContent>
+                              </Tooltip>
                             )}
                             {isAdmin && (
                               <AlertDialog open={deleteDialog.open && deleteDialog.id === donation._id} onOpenChange={(open) => setDeleteDialog({ open, id: open ? donation._id : null })}>
-                                <AlertDialogTrigger asChild>
-                                  <Button variant="ghost" size="icon-sm" disabled={mutating}>
-                                    <Trash2 className="size-4 text-destructive" />
-                                  </Button>
-                                </AlertDialogTrigger>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <AlertDialogTrigger asChild>
+                                      <Button variant="ghost" size="icon-sm" disabled={mutating}>
+                                        <Trash2 className="size-4 text-destructive" />
+                                      </Button>
+                                    </AlertDialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>Delete donation</TooltipContent>
+                                </Tooltip>
                                 <AlertDialogContent>
                                   <AlertDialogHeader>
                                     <AlertDialogTitle>Delete donation record?</AlertDialogTitle>
@@ -397,6 +409,7 @@ export default function DonationsPage() {
                                 </AlertDialogContent>
                               </AlertDialog>
                             )}
+                            </TooltipProvider>
                           </div>
                         </TableCell>
                       </TableRow>
