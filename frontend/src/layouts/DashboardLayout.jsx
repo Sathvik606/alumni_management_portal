@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, Gift, Users, CalendarDays, Briefcase, UserRound, LogOut, Menu, X } from 'lucide-react';
+import logo from '@/assets/logo2.png';
 import ThemeToggle from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
@@ -53,7 +54,7 @@ export default function DashboardLayout() {
       >
         <div className="flex items-center justify-between px-2">
           <div className="flex items-center gap-2">
-            <img src="/src/assets/logo2.png" alt="Alumni Link" className={`shrink-0 transition-all ${collapsed ? 'h-12' : 'h-14'} w-auto`} />
+            <img src={logo} alt="Alumni Link" className={`shrink-0 transition-all ${collapsed ? 'h-12' : 'h-14'} w-auto`} />
             {!collapsed && <span className="font-bold text-sm tracking-tight">ALUMNI LINK</span>}
           </div>
           <TooltipProvider>

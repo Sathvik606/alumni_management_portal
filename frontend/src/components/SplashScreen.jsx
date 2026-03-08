@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import logo from '@/assets/logo2.png';
 
 export default function SplashScreen() {
   return (
@@ -21,7 +22,7 @@ export default function SplashScreen() {
           }}
           className="flex flex-col items-center gap-3"
         >
-          <img src="/src/assets/logo2.png" alt="Alumni Link" className="h-28 w-auto" />
+          <img src={logo} alt="Alumni Link" className="h-28 w-auto" />
           <h1 className="text-3xl font-bold tracking-tight">ALUMNI LINK</h1>
         </motion.div>
         <div className="text-center">
