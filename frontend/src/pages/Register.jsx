@@ -8,6 +8,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 import useAuthStore from '@/store/authStore';
 import { toast } from 'sonner';
 import { Eye, EyeOff } from 'lucide-react';
+import logo from '@/assets/logo2.png';
 
 export default function RegisterPage() {
   const { register, loading } = useAuthStore();
@@ -75,7 +76,7 @@ export default function RegisterPage() {
         <div className="mb-8 flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <img src="/src/assets/logo2.png" alt="Alumni Link" className="h-20 w-auto" />
+              <img src={logo} alt="Alumni Link" className="h-20 w-auto" />
               <h1 className="text-2xl font-bold tracking-tight">ALUMNI LINK</h1>
             </div>
             <h2 className="text-2xl font-semibold">Create your account</h2>
